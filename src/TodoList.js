@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import TodoItems from "./TodoItems";
-import TodoInput from "./TodoInput";
+import AddTodo from "./TodoInput";
 import {Segment} from "semantic-ui-react";
 
 class TodoList extends Component {
@@ -13,10 +13,10 @@ class TodoList extends Component {
 
   render() {
     return (
-      <Segment style={{padding: '3em', margin: '1em 20em'}}>
+      <Segment style={{padding: '3em', margin: '1em 10em'}}>
         <h2>TODO List</h2>
         <TodoItems items={this.state.todos}/>
-        <TodoInput addTodo={this.addTodo}/>
+        <AddTodo addTodo={this.addTodo}/>
       </Segment>
     );
   }

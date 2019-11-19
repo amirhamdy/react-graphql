@@ -1,29 +1,32 @@
 import React, {Component} from 'react';
 import {Button, Input} from "semantic-ui-react";
+import {ADD_TODO} from "./TodosContainer";
+import {Mutation} from '@apollo/react-components';
 
-class TodoInput extends Component {
+class AddTodo extends Component {
   state = {item: ''};
 
   onChange = (e) => {
     this.setState({item: e.target.value});
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.addTodo(this.state.item);
-    this.setState({item: ''}, function () {
-      this.refs.item.focus();
-    });
-  };
-
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <Input focus placeholder='What TODO...' onChange={this.onChange} value={this.state.item} ref="item"/>
-        <Button primary>Add</Button>
-      </form>
+      <Mutation mutation={ADD_TODO}>
+        {(addTodo, {data}) => (
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              addTodo({variables: {user_id: '1', task: this.state.item, done: false}});
+              this.setState({item: ''})
+            }}>
+            <Input focus placeholder='What TODO...' onChange={this.onChange} value={this.state.item}/>
+            <Button primary>Add</Button>
+          </form>
+        )}
+      </Mutation>
     );
   }
-}
+};
 
-export default TodoInput;
+export default AddTodo;

@@ -21,7 +21,7 @@ class TodoList extends Component {
       <Segment style={{padding: '3em', margin: '1em 10em'}}>
         <h2>TODO List</h2>
         <TodoItems items={this.state.todos}/>
-        <AddTodo addTodo={this.addTodo} updateTodos={this.refetchTodos}/>
+        <AddTodo addTodo={this.addTodo} refetchTodos={this.refetchTodos}/>
       </Segment>
     );
   }

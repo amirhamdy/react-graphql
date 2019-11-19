@@ -8,9 +8,9 @@ export const ADD_TODO = gql`mutation createTodo($task: String!)
   {createTodo(input: {task: $task, user_id: "", done: false}) {id task done}}`;
 
 export default () => (
-  <Query query={GET_TODOS} pollInterval={45000}>
+  <Query query={GET_TODOS}>
     {({loading, data, refetch}) => {
-      return loading ? <h1>Loading...</h1> : <TodoList todos={data.todos}/>;
+      return loading ? <h1>Loading...</h1> : <TodoList todos={data.todos} refetch={refetch}/>;
     }}
   </Query>
 );

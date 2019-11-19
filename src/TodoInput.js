@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Input} from "semantic-ui-react";
-import {ADD_TODO} from "./TodosContainer";
+import {ADD_TODO, GET_TODOS} from "./TodosContainer";
 import {Mutation} from '@apollo/react-components';
 
 class AddTodo extends Component {
@@ -17,8 +17,12 @@ class AddTodo extends Component {
           <form
             onSubmit={e => {
               e.preventDefault();
-              addTodo({variables: {user_id: '1', task: this.state.item, done: false}});
-              this.setState({item: ''})
+              addTodo({
+                variables: {user_id: '1', task: this.state.item, done: false},
+                // refetchQueries: [{query: GET_TODOS}]
+              });
+              this.setState({item: ''});
+              this.props.refetchTodos();
             }}>
             <Input focus placeholder='What TODO...' onChange={this.onChange} value={this.state.item}/>
             <Button primary>Add</Button>
